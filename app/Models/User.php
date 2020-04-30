@@ -36,4 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    const LEVEL_USER = 0;
+    const LEVEL_ADMIN = 1;
 }
