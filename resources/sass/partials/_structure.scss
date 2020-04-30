@@ -1,0 +1,6 @@
+.navbar{
+    height: $navbar-height;
+}
+main, main .container{
+    min-height: calc(100vh - #{$navbar-height});
+}
