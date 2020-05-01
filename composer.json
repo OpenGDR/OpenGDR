@@ -1,12 +1,23 @@
 {
-    "name": "laravel/laravel",
+    "name": "offmbs/open-gdr",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Open-GDR",
     "keywords": [
-        "framework",
-        "laravel"
+        "gdr",
+        "play-by-chat",
+        "rpg-engine",
+        "laravel",
+        "php"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Mattia Bassi",
+            "email": "offmbs@gmail.com",
+            "homepage": "https://github.com/offmbs/open-gdr",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^7.2.5",
         "fideloper/proxy": "^4.2",
