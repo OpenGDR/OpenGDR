@@ -13,6 +13,89 @@
             </nav>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <form method="POST" action="{{ route('user.settings.update') }}">
+                @csrf
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Informazioni utente
+                    </div>
+                    <div class="card-body">
+                        @if (session('updateinfo'))
+                        <div class="alert alert-success" role="alert">
+                            Le tue informazioni sono state aggiornate con successo!
+                        </div>
+                        @endif<div class="row">
+                            <div class="col col-md-6 form-group">
+                                <label for="email">Email *</label>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required value="{{ old('email')?:$user->email }}">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-6 form-group">
+                                <label for="name">Nome Utente</label>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name')?:$user->name }}">
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col col-md-6 form-group">
+                                <label for="surname">Cognome Utente</label>
+                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname')?:$user->surname }}">
+                                @error('surname')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-6 form-group">
+                                <label for="date_of_birth">Data di nascita</label>
+                                <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth')?:(!is_null($user->date_of_birth)?$user->date_of_birth->format('Y-m-d'):'') }}">
+                                @error('date_of_birth')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col col-md-6 form-group">
+                                <label for="motto">Motto</label>
+                                <input id="motto" type="text" class="form-control @error('motto') is-invalid @enderror" name="motto" value="{{ old('motto')?:$user->motto }}">
+                                @error('surname')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Descrizione</label>
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <editor input-name="description" initial-value="{{ old('description')?:$user->description }}"></editor>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-success"><i class="far fa-save"></i> Aggiorna Informazioni</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col col-md-6">
             <div class="card h-100">

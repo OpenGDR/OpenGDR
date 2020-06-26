@@ -21,6 +21,13 @@ class CreateUsersTable extends Migration
             $table->bigInteger('level')->default(0);
             $table->boolean('banned')->default(false);
             $table->dateTime('banned_at', 0)->nullable();
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->string('motto')->nullable();
+            $table->longText('description')->nullable();
+            //todo: aggiungiamo i social link all'utente?
+            //$table->json('socials')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

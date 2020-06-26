@@ -26,4 +26,5 @@ Route::prefix('utente')->group(function () {
     Route::get('/impostazioni', 'UserController@settings')->name('user.settings');
     Route::post('/impostazioni', 'UserController@updatePassword')->name('user.settings.password');
     Route::post('/impostazioni/cancella-utente', 'UserController@deleteUser')->name('user.settings.delete-user');
+    Route::post('/impostazioni/aggiorna-utente', 'UserController@updateUser')->name('user.settings.update');
 });

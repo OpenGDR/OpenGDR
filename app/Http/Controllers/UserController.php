@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -79,5 +80,37 @@ class UserController extends Controller
         Auth::logout();
 
         return redirect()->route('login')->with('success', 'Utente cancellato correttamente!');
+    }
+
+
+    public function updateUser(Request $request)
+    {
+        $user  = $request->user();
+    
+
+        $validationRule = [
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($user->id),
+            ],
+            'name' => '',
+            'surname' => '',
+            'date_of_birth' => '',
+            'motto' => '',
+            'description' => ''
+        ];
+        if(!is_null($request->get('date_of_birth'))){
+            $validationRule['date_of_birth'] = 'date_format:Y-m-d';
+        }
+        $validatedData = $this->validate($request, $validationRule);
+        
+
+        foreach ($validatedData as $key => $value) {
+            $user->{$key} = $value;
+        }
+        $user->save();
+
+        return redirect()->route('user.settings')->with('updateinfo', true);
     }
 }

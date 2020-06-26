@@ -24,3 +24,4 @@ L'utente è inserito di default nel seeder con altre utenze create random
 -   [x] [font awesome 5](https://fontawesome.com/)
 -   [x] [bootstrap 4.5](https://getbootstrap.com/)
 -   [x] [vue.js 2.5](https://vuejs.org/)
+-   [x] [TOAST UI Editor for Vue](https://github.com/nhn/tui.editor/tree/master/apps/vue-editor)
