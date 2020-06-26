@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -53,5 +56,28 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('user.settings')->with('updatepassword', true);
+    }
+
+
+    /**
+     * Funzione per la cancellazione dell'utente
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function deleteUser(Request $request)
+    {
+        $user = $request->user();
+
+        $user->email = 'deleted' . Str::uuid();
+        $user->deleted_at = Carbon::now();
+        //todo: aggiunta eliminazione e sostituzione dati personaggi (ad esempio sostituire il nome aggiungendo [utente cancellato])
+
+
+        $user->save();
+
+        Auth::logout();
+
+        return redirect()->route('login')->with('success', 'Utente cancellato correttamente!');
     }
 }

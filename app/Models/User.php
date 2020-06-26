@@ -37,6 +37,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $dates = [
+        'deleted_at',
+    ];
+
     const LEVEL_USER = 0;
     const LEVEL_ADMIN = 1;
 }

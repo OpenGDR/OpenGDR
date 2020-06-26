@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +25,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('utente')->group(function () {
     Route::get('/impostazioni', 'UserController@settings')->name('user.settings');
     Route::post('/impostazioni', 'UserController@updatePassword')->name('user.settings.password');
+    Route::post('/impostazioni/cancella-utente', 'UserController@deleteUser')->name('user.settings.delete-user');
 });
