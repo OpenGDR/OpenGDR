@@ -43,6 +43,7 @@ class UserController extends Controller
     public function updatePassword(Request $request)
     {
         $user = $request->user();
+        $this->authorize('update', $user);
 
         $this->validate($request, [
             'current-password' => ['required', function ($attribute, $value, $fail) use ($user) {
@@ -70,6 +71,8 @@ class UserController extends Controller
     {
         $user = $request->user();
 
+        $this->authorize('update', $user);
+
         $user->email = 'deleted' . Str::uuid();
         $user->deleted_at = Carbon::now();
         //todo: aggiunta eliminazione e sostituzione dati personaggi (ad esempio sostituire il nome aggiungendo [utente cancellato])
@@ -86,7 +89,7 @@ class UserController extends Controller
     public function updateUser(Request $request)
     {
         $user  = $request->user();
-    
+        $this->authorize('update', $user);
 
         $validationRule = [
             'email' => [
@@ -104,7 +107,7 @@ class UserController extends Controller
             $validationRule['date_of_birth'] = 'date_format:Y-m-d';
         }
         $validatedData = $this->validate($request, $validationRule);
-        
+
 
         foreach ($validatedData as $key => $value) {
             $user->{$key} = $value;
