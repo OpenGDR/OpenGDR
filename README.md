@@ -20,8 +20,9 @@ L'utente è inserito di default nel seeder con altre utenze create random
 
 ### Principali frameword / tools / pacchetti / librerie esterni utilizzati
 
--   [x] [laravel 7](https://laravel.com/)
--   [x] [font awesome 5](https://fontawesome.com/)
--   [x] [bootstrap 4.5](https://getbootstrap.com/)
+-   [x] [Laravel 7](https://laravel.com/)
+-   [x] [Font Awesome 5](https://fontawesome.com/)
+-   [x] [Bootstrap 4.5](https://getbootstrap.com/)
 -   [x] [vue.js 2.5](https://vuejs.org/)
 -   [x] [TOAST UI Editor for Vue](https://github.com/nhn/tui.editor/tree/master/apps/vue-editor)
+-   [x] [Datatable - Laravel](https://yajrabox.com/docs/laravel-datatables/master)

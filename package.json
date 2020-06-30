@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "@toast-ui/vue-editor": "^2.2.0"
+        "@toast-ui/vue-editor": "^2.2.0",
+        "datatables.net-bs4": "^1.10.21",
+        "datatables.net-buttons-bs4": "^1.6.2"
     }
 }
