@@ -18,7 +18,7 @@ L'utente è inserito di default nel seeder con altre utenze create random
 | ----------------- | ---------------------------------------------------------------------- |
 | FONT_AWESOME_CODE | Chiave venerata da [Font Awesome](https://fontawesome.com/) versione 5 |
 
-### Principali frameword / tools / pacchetti / librerie esterni utilizzati
+### Principali framework / tools / pacchetti / librerie esterni utilizzati
 
 -   [x] [Laravel 7](https://laravel.com/)
 -   [x] [Font Awesome 5](https://fontawesome.com/)
