@@ -42,3 +42,17 @@ require('datatables.net-buttons-bs4');
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+
+// fix per la visualizzazione del file caricato nei custom file input di bootstrap
+$(() => {
+    let customFileInput = document.querySelector('.custom-file-input');
+    if (customFileInput) {
+        customFileInput.addEventListener('change', function (e) {
+            var fileName = this.files[0].name;
+            var nextSibling = e.target.nextElementSibling
+            nextSibling.innerText = fileName
+        });
+    }
+
+});

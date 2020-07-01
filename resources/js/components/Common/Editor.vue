@@ -33,6 +33,7 @@ export default {
     data() {
         return {
             editorOptions: {
+                mode: 'wysiwyg',
                 usageStatistics: false,
                 language: "it-IT",
                 hideModeSwitch: true,
@@ -60,7 +61,7 @@ export default {
 
     methods: {
         updateData() {
-            this.valueData = this.$refs.tuiEditor.invoke("getHtml");
+            this.valueData = this.$refs.tuiEditor.invoke("getMarkdown");
         }
     }
 };

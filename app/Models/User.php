@@ -50,4 +50,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     const LEVEL_USER = 0;
     const LEVEL_ADMIN = 1;
+
+
+    public function isAdmin()
+    {
+        return $this->level == User::LEVEL_ADMIN;
+    }
 }

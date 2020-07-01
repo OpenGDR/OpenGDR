@@ -11,7 +11,7 @@ class UserPolicy
 
     public function before($user, $ability)
     {
-        if ($user->level == User::LEVEL_ADMIN) {
+        if ($user->isAdmin()) {
             return true;
         }
     }
@@ -59,6 +59,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
+
         return $user->id == $model->id;
     }
 
@@ -121,5 +122,16 @@ class UserPolicy
     public function unbanUser(User $user, User $model)
     {
 
+    }
+
+    /**
+     * Determina quando un utente può visualizzare il menù di gestione (solo la voce generale, non le sottovoci)
+     *
+     * @param  mixed $user
+     * @return void
+     */
+    public function showAdminMenu(User $user)
+    {
+        return false;
     }
 }

@@ -5,9 +5,9 @@
             {{ config('app.name', 'Open GDR') }}
         </a>
         @else
-            <a class="navbar-brand" href="{{ route('home') }}">
-                {{ config('app.name', 'Open GDR') }}
-            </a>
+        <a class="navbar-brand" href="{{ route('home') }}">
+            {{ config('app.name', 'Open GDR') }}
+        </a>
         @endguest
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -28,11 +28,22 @@
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Accedi') }}</a>
                     </li>
                     @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registrati') }}</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Registrati') }}</a>
+                    </li>
                     @endif
                 @else
+                    @can('showAdminMenu', \App\Models\User::class)
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdownAdmin" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Impostazioni <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownAdmin">
+                                <a href="{{ route('admin.race.list') }}" class="dropdown-item">Razze</a>
+                            </div>
+                        </li>
+                    @endcan
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             @lang('Utente') <span class="caret"></span>
@@ -42,18 +53,18 @@
                             <a href="{{ route('user.settings') }}" class="dropdown-item">Impostazioni</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Esci') }}
-                            </a>
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            {{ __('Esci') }}
+                        </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
-        </div>
-    </div>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+        @endguest
+    </ul>
+</div>
+</div>
 </nav>
