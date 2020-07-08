@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Race;
+use App\Models\Race;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RacePolicy
@@ -33,7 +33,7 @@ class RacePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Race  $race
+     * @param  \App\Models\Race  $race
      * @return mixed
      */
     public function view(User $user, Race $race)
@@ -56,7 +56,7 @@ class RacePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Race  $race
+     * @param  \App\Models\Race  $race
      * @return mixed
      */
     public function update(User $user, Race $race)
@@ -68,7 +68,7 @@ class RacePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Race  $race
+     * @param  \App\Models\Race  $race
      * @return mixed
      */
     public function delete(User $user, Race $race)
@@ -80,7 +80,7 @@ class RacePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Race  $race
+     * @param  \App\Models\Race  $race
      * @return mixed
      */
     public function restore(User $user, Race $race)
@@ -92,7 +92,7 @@ class RacePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Race  $race
+     * @param  \App\Models\Race  $race
      * @return mixed
      */
     public function forceDelete(User $user, Race $race)

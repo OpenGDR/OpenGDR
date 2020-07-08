@@ -38,9 +38,13 @@
                             <a id="navbarDropdownAdmin" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 Impostazioni <span class="caret"></span>
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownAdmin">
-                                <a href="{{ route('admin.race.list') }}" class="dropdown-item">Razze</a>
+                                @can('viewAny', \App\Models\User::class)
+                                    <a href="{{ route('admin.user.list') }}" class="dropdown-item">Utenti</a>
+                                @endcan
+                                @can('viewAny', \App\Models\Race::class)
+                                    <a href="{{ route('admin.race.list') }}" class="dropdown-item">Razze</a>
+                                @endcan
                             </div>
                         </li>
                     @endcan

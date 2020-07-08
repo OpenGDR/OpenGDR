@@ -56,4 +56,22 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->level == User::LEVEL_ADMIN;
     }
+
+    /**
+     * Restituisce la label del livello utente
+     *
+     * @return void
+     */
+    public function getLevelLabelAttribute()
+    {
+        switch ($this->level){
+            case self::LEVEL_ADMIN:
+                return 'Amministratore';
+            break;
+            case self::LEVEL_USER:
+            default:
+                return 'Utente';
+            break;
+        }
+    }
 }

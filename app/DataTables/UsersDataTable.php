@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\Race;
+use App\Models\User;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class RacesDataTable extends DataTable
+class UsersDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -19,25 +19,31 @@ class RacesDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($row) {
-                    $btn = '<a href="' . route('admin.race.edit', ['id' => $row->id]) . '" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i> </a>';
-                    return $btn;
+                $btn = '<a href="' . route('admin.user.edit', ['id' => $row->id]) . '" class="edit btn btn-primary btn-sm"><i class="far fa-eye"></i></a>';
+                return $btn;
             })
-            ->addColumn('icon_image', function ($row) {
-                if(!is_null($row->icon_url)){
-                 return '<img class="img-fluid" src="' . $row->icon_url . '" >';
+            ->editColumn('banned', function ($row) {
+                if ($row->banned) {
+                    return '<i class="fas fa-user-slash text-danger"></i>';
                 }
-                return null;
+                return '<i class="fas fa-user text-success"></i>';
             })
-            ->rawColumns(['icon_image', 'action']);
+            ->editColumn('created_at', function ($row) {
+                return $row->created_at->format('d/m/Y H:i');
+            })
+            ->editColumn('level', function ($row) {
+                return $row->level_label;
+            })
+            ->rawColumns(['action', 'banned']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Race $model
+     * @param \App\Models\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Race $model)
+    public function query(User $model)
     {
         return $model->newQuery();
     }
@@ -50,10 +56,10 @@ class RacesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('races-table')
+                    ->setTableId('usersdatatable-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->orderBy(0, 'asc');
+                    ->orderBy(0);
     }
 
     /**
@@ -65,19 +71,19 @@ class RacesDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('icon_image', 'Icona')
+            Column::make('email'),
+            Column::computed('banned', 'Icona')
                 ->orderable(false)
                 ->exportable(false)
                 ->width(60)
+                ->title('Bannato')
                 ->addClass('text-center'),
-            Column::make('name'),
-            Column::make('character_number')
-            ->orderable(false)
-            ->searchable(false)
-            ->title('Personaggi'),
+            Column::make('level')
+                ->title('Livello utente'),
+            Column::make('created_at'),
             Column::computed('action')
-                ->orderable(false)
                 ->exportable(false)
+                ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
         ];
@@ -90,6 +96,6 @@ class RacesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Races_' . date('YmdHis');
+        return 'Users_' . date('YmdHis');
     }
 }

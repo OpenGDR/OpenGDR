@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UsersDataTable;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -86,6 +88,12 @@ class UserController extends Controller
     }
 
 
+    /**
+     * Aggiornamento dei dati dell'utente
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function updateUser(Request $request)
     {
         $user  = $request->user();
@@ -116,5 +124,76 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('user.settings')->with('updateinfo', true);
+    }
+
+
+    /**
+     * Rotta per la visualizzazione della lista delle razze nel backend
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function getAdminList(UsersDataTable $dataTable)
+    {
+        $this->authorize('viewAny', User::class);
+
+        return $dataTable->render('admin.user.list');
+    }
+
+
+    /**
+     * Restituisce la pagina di visualizzazione utente
+     *
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return void
+     */
+    public function getAdminEdit(Request $request, $id = null)
+    {
+        $user = User::find($id);
+        if (is_null($user)) {
+            return abort(404);
+        }
+
+        $this->authorize('update', $user);
+
+        return view('admin.user.edit', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Salvataggio dei dati utente
+     *
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return void
+     */
+    public function postAdminEdit(Request $request, $id = null)
+    {
+
+        $user = User::find($id);
+        if (is_null($user)) {
+            return abort(404);
+        }
+
+        switch($request->get('action', null)){
+            case 'ban':
+                $this->authorize('banUser', $user);
+
+                $user->banned = true;
+                $user->save();
+                return redirect()->route('admin.user.edit', $user->id)->with('success', 'Utente bannato con successo');
+            break;
+            case 'unban':
+                $this->authorize('unbanUser', $user);
+
+                $user->banned = false;
+                $user->save();
+                return redirect()->route('admin.user.edit', $user->id)->with('success', 'Ban utente rimosso con successo');
+                break;
+        }
+
+        return redirect()->route('admin.user.edit', $user->id);
     }
 }

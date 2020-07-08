@@ -50,6 +50,14 @@ class RaceController extends Controller
     }
 
 
+
+    /**
+     * Salvataggio dei dati della razza
+     *
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return void
+     */
     public function postAdminEdit(Request $request, $id = null)
     {
 

@@ -16,7 +16,7 @@ L'utente è inserito di default nel seeder con altre utenze create random
 
 | Chiave            | Descrizione                                                            |
 | ----------------- | ---------------------------------------------------------------------- |
-| FONT_AWESOME_CODE | Chiave venerata da [Font Awesome](https://fontawesome.com/) versione 5 |
+| FONT_AWESOME_CODE | Chiave generata da [Font Awesome](https://fontawesome.com/) versione 5 |
 
 ### Principali framework / tools / pacchetti / librerie esterni utilizzati
 
