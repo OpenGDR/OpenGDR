@@ -21,6 +21,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/utente-bannato', 'UserController@getBannedPage')->name('banned');
 
 Route::prefix('utente')->group(function () {
     Route::get('/impostazioni', 'UserController@settings')->name('user.settings');

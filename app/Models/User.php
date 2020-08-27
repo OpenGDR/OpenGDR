@@ -40,12 +40,13 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'date_of_birth' => 'date:Y-m-d'
     ];
 
     protected $dates = [
         'deleted_at',
+        'banned_at',
+        'email_verified_at',
     ];
 
     const LEVEL_USER = 0;

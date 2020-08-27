@@ -180,20 +180,27 @@ class UserController extends Controller
         switch($request->get('action', null)){
             case 'ban':
                 $this->authorize('banUser', $user);
-
                 $user->banned = true;
+                $user->banned_at = Carbon::now();
                 $user->save();
                 return redirect()->route('admin.user.edit', $user->id)->with('success', 'Utente bannato con successo');
             break;
             case 'unban':
                 $this->authorize('unbanUser', $user);
-
                 $user->banned = false;
+                $user->banned_at = null;
                 $user->save();
                 return redirect()->route('admin.user.edit', $user->id)->with('success', 'Ban utente rimosso con successo');
                 break;
         }
 
         return redirect()->route('admin.user.edit', $user->id);
+    }
+
+
+    public function getBannedPage(Request $request)
+    {
+
+        return view('user.banned');
     }
 }

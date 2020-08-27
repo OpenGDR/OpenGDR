@@ -11,6 +11,16 @@ class RaceController extends Controller
 {
 
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
+    /**
      * Rotta per la visualizzazione della lista delle razze nel backend
      *
      * @param  mixed $request

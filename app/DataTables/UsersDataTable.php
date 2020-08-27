@@ -32,9 +32,14 @@ class UsersDataTable extends DataTable
                 return $row->created_at->format('d/m/Y H:i');
             })
             ->editColumn('level', function ($row) {
-                return $row->level_label;
+
+                $addText = '';
+                if($row->banned){
+                    $addText = ' <small class="badge badge-light">Bannato il ' . $row->banned_at->format('d/m/Y') . '</small>';
+                }
+                return $row->level_label . $addText;
             })
-            ->rawColumns(['action', 'banned']);
+            ->rawColumns(['action', 'banned', 'level']);
     }
 
     /**

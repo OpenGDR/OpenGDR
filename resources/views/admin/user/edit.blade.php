@@ -81,6 +81,7 @@
                             <form method="POST" action="{{ route('admin.user.edit', [ 'id' => $user->id] )}}">
                                 @csrf
                                 @if($user->banned)
+                                <small>Utente bannato il: {{ $user->banned_at?$user->banned_at->format('d/m/Y H:i'): '---' }}</small><br />
                                     <input type="hidden" name="action" value="unban">
                                     <button type="submit" class="btn btn-success"><i class="fas fa-user"></i> Rimuovi ban utente</button>
                                 @else
